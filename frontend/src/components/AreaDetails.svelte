@@ -6,7 +6,7 @@
   import { calculateRectangleArea } from '../lib/area';
   import BarChart from './BarChart.svelte'; // Import the BarChart component
 
-  const client = new APIClient('http://localhost:8080'); // Replace with your API base URL
+  const client = new APIClient('http://34.88.213.170:8080'); // Replace with your API base URL
 
   let area: Area | null = null;
   let histories: Array<{history: History, imageUrl: string | null}> = [];
