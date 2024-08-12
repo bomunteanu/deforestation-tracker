@@ -5,7 +5,7 @@
     import { isAuthenticated } from '../store'; // Adjust the path if necessary
     import { get } from 'svelte/store';
   
-    const client = new APIClient('http://localhost:8080'); // Adjust base URL if needed
+    const client = new APIClient('http://34.88.213.170:8080'); // Adjust base URL if needed
   
     // Function to check if the user is authenticated
     const checkAuthentication = async () => {
