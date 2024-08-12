@@ -6,7 +6,7 @@
     import { calculateRectangleArea } from '../lib/area';
     import PieChart from './PieChart.svelte'; // Import the PieChart component
   
-    const client = new APIClient('http://localhost:8080'); // Replace with your API base URL
+    const client = new APIClient('http://34.88.213.170:8080'); // Replace with your API base URL
   
     let history: History | null = null;
     let area: Area | null = null;
