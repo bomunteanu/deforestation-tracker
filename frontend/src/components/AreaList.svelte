@@ -7,7 +7,7 @@
     import L from 'leaflet';
     import { calculateRectangleArea } from '../lib/area';
 
-    const client = new APIClient('http://localhost:8080'); // Replace with your API base URL
+    const client = new APIClient('http://34.88.213.170:8080'); // Replace with your API base URL
 
     let areas: Array<Area> = [];
     let loading = true;
