@@ -13,7 +13,7 @@
       error = null;
 
       try {
-        const client = new APIClient('http://localhost:8080'); // Adjust base URL if needed
+        const client = new APIClient('http://34.88.213.170:8080'); // Adjust base URL if needed
         await client.login(email, password);
         dispatch('loginSuccess');
         window.location.replace("/");
