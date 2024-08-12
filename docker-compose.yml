@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: myappdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - myapp-network
+
+  wait-for-db:
+    image: atkrad/wait4x
+    depends_on:
+      - db
+    command: tcp db:5432 -t 60s -i 500ms
+    networks:
+      - myapp-network
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+      - image_data:/app/images
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=myappdb
+    depends_on:
+      - wait-for-db
+    ports:
+      - "8080:8080"
+    networks:
+      - myapp-network
+
+  computer-vision:
+    build: ./computer-vision
+    volumes:
+      - image_data:/app/images
+    ports:
+      - "5000:5000"
+    networks:
+      - myapp-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"  
+    networks:
+      - myapp-network
+    depends_on:
+      - backend
+      - computer-vision
+
+networks:
+  myapp-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  image_data:
